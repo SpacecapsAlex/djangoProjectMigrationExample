@@ -6,9 +6,6 @@ from django.db import models
 class User(models.Model):
     name = models.CharField(max_length=200)
     age = models.IntegerField(default=0)
-    email = models.EmailField(max_length=254, default='')
-    is_programmer = models.BooleanField(default=False)
-    phone = models.CharField(max_length=20, default='')
 
 # py manage.py makemigrations <application>
 
@@ -21,3 +18,6 @@ class User(models.Model):
 
 # py manage.py makemigrations <application> - создание миграции в конкретном приложении
 # py manage.py makemigrations - создание миграции во всех приложениях
+
+
+#  CRUD - create, read, update, delete
