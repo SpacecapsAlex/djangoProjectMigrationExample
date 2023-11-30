@@ -54,3 +54,35 @@ def update_user(request: HttpRequest) -> HttpResponse:
     except:
         return HttpResponse("Error")
 
+
+def test_template(request: HttpRequest) -> HttpResponse:
+    user = User.objects.get(id=2)
+    template = loader.get_template('test.html')
+    data = {
+        'header': user.name,
+        'phrase': user.age,
+    }
+    return HttpResponse(template.render(data))
+
+
+def list_requests(request: HttpRequest) -> HttpResponse:
+    users = User.objects.all().values()
+    template = loader.get_template('list_example.html')
+    data = {
+        'header': 'Пользователи',
+        'users': users,
+    }
+    return HttpResponse(template.render(data))
+
+
+def get_user_profile(request: HttpRequest, id: int) -> HttpResponse:
+    try:
+        user = User.objects.get(id=id)
+        template = loader.get_template('user_profile.html')
+        data = {
+            'header': 'Профиль пользователя',
+            'user': user,
+        }
+        return HttpResponse(template.render(data, request))
+    except:
+        return HttpResponse("Error")
